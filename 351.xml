@@ -1,0 +1,26 @@
+<root>
+<request>
+<remoteAddr>193.106.132.51</remoteAddr>
+<authorid>351</authorid>
+</request>
+<author id='351' spin='44923840' numOfLibraryItems='389' numOfItemsFull='387' libraryCited='8651' citedRefs='8562' citedFull='8630' citingPubl='3464' maxItemCited='1114' publCited='337' publCitedPrc='87,1' avgCited='22,79' numOfCoreItems='340' numOfCoreItemsPrc='87,9' coreCited='7394' hirsch='47' hirschs='39' hirscha='41' hirschCore='41' hirschFull='47' firstPublYear='1972' selfCited='2092' selfCitedPrc='24,2' coauthorCited='5203' coauthorCitedPrc='60,3' coauthorsNum='116' publForeign='212' publRussian='139' publVAK='138' publTranslated='93' publIF='302' citForeign='6252' citRussian='1206' citVAK='1088' citTranslated='750' citIF='6209' avgPublIF='2,148' avgCitIF='2,877' publ5='41' publCore5 ='40' citPubl5='293' cit5='1724' citCorePubl5='292' mainRubricCode='290000. Физика' OECDCode='103. Physical sciences and astronomy' citCorePubl5Percentile='6'>
+<lastName>Бухбиндер</lastName>
+<firstName>Иосиф</firstName>
+<secondName>Львович</secondName>
+<lastNameEng>Bukhbinder</lastNameEng>
+<initialsEng>I.L.</initialsEng>
+<city>Томск</city>
+<orgName inn='7018017907'>Томский государственный педагогический университет</orgName>
+<orgNameEng inn='7018017907'>Tomsk State Pedagogical University</orgNameEng>
+<orgDepName>физико-математический факультет</orgDepName>
+<otherOrgs></otherOrgs><post>заведующий кафедрой</post>
+<country>Россия</country>
+<authorCodes><code type='ResearcherID'>K-9306-2013</code>
+<code type='ScopusID'>7005474928</code>
+</authorCodes><links>
+<link>http://elibrary.ru/author_profile.asp?id=351</link>
+<link>http://elibrary.ru/author_items.asp?authorid=351</link>
+<link>http://elibrary.ru/author_refs.asp?authorid=351</link>
+</links>
+</author>
+</root>
