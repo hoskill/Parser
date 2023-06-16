@@ -1,32 +1,36 @@
-import json
-
 from bs4 import BeautifulSoup
 from pathlib import Path
-import io
+import io, json, sys, re
 
-names = []
-links = []
-data = {}
 
-directory = 'xml'
-files = Path(directory).glob('*')
-for file in files:
-    f = io.open(file, mode='r', encoding='utf-8').read()
-    soup = BeautifulSoup(f, 'lxml')
+def set_author_fullname(soup: BeautifulSoup) -> str:
+    callbacks = {
+        'lastname': lambda x: soup.find(x).text if soup.find(x) else '',
+        'firstname': lambda x: soup.find(x).text if soup.find(x) else '',
+        'secondname': lambda x: soup.find(x).text if soup.find(x) else '',
+    }
+    return ' '.join([callback(key) for key, callback in callbacks.items()])
 
-    name = soup.find('name')
-# print(name.text.strip())
-    names.append(name.text)
 
-    link = soup.find('links').text.replace('\n', ' ').strip().split(' ')
-    del link[0]
-# print(link.text.strip())
-    links.append(*link)
+def parse(file_path: str, json_path: str) -> None:
+    data = {}
+    files = Path(file_path).glob('*')
 
-print(names)
-print(links)
-for i in range(len(names)):
-    data[names[i]] = links[i]
+    for file in files:
+        f = io.open(file, mode='r', encoding='utf-8').read()
+        soup = BeautifulSoup(f, 'lxml')
 
-with open('articles.json', 'w', encoding='utf-8') as file:
-    json.dump(data, file, ensure_ascii=False, indent=4)
+        name = soup.find('name').text if soup.find('name') else set_author_fullname(soup)
+        links = soup.find('links').text.replace('\n', ' ').strip().split(' ')
+
+        data[name] = [link for link in links if re.search('author_items', link)][0]
+
+    with open(json_path, 'w', encoding='utf-8') as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)
+
+
+if __name__ == '__main__':
+    dir_path = 'xml' if len(sys.argv) == 1 else sys.argv[1]
+    json_path = 'articles.json' if len(sys.argv) != 3 else sys.argv[2]
+
+    parse(dir_path, json_path)
