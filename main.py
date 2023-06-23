@@ -12,9 +12,9 @@ def set_author_fullname(soup: BeautifulSoup) -> str:
     return ' '.join([callback(key) for key, callback in callbacks.items()])
 
 
-def parse(file_path: str, json_path: str) -> None:
+def parse(dir_path: str, json_path: str) -> None:
     data = {}
-    files = Path(file_path).glob('*')
+    files = Path(dir_path).glob('*')
 
     for file in files:
         f = io.open(file, mode='r', encoding='utf-8').read()
