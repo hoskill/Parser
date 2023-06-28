@@ -23,7 +23,7 @@ def parse(dir_path: str, json_path: str) -> None:
         name = soup.find('name').text if soup.find('name') else set_author_fullname(soup)
         links = soup.find('links').text.replace('\n', ' ').strip().split(' ')
 
-        data[name] = [link for link in links if re.search('author_items', link)][0]
+        data[name] = [link for link in links if re.search('author_profile', link)][0]
 
     with open(json_path, 'w', encoding='utf-8') as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
