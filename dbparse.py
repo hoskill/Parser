@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from pathlib import Path
 from config import host, user, password, db_name
-import io, json, sys, re, mariadb
+import io, sys, re, mariadb
 
 # Connect to MariaDB Platform
 try:
