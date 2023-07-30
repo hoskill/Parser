@@ -7,7 +7,7 @@ names = []
 error_description: str = 'Произошла ошибка при подключении к сервису...'
 
 
-def connect(background_mode: bool = False) -> None:
+def lib_connect(background_mode: bool = False) -> None:
     """Выбор режима работы браузера и подключение к библиотеке
     Для перевода браузера в фоновый режим передайте 0 """
 
@@ -92,14 +92,14 @@ def get_data_by_page() -> None:
 
 def get_all_links(background_mode: bool = False, university: str = "ТГПУ", town: str = "Томск"):
     """Сбор ссылок всех сотрудников из библиотеки"""
-    connect(background_mode)
+    lib_connect(background_mode)
     get_employee(university, town)
     next_page = driver.find_element(By.CSS_SELECTOR, '#pages > table > tbody > tr > td:nth-child(12) > a')
     last_page = driver.find_element(By.CSS_SELECTOR, '#pages > table > tbody > tr > td:nth-child(13) > a')
 
     # Проверка, что следующая страница не является последней
     while next_page.get_attribute('href') != last_page.get_attribute('href'):
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(25)
         get_data_by_page()
         print('Готовимся к переходу на следующую страницу...')
         next_page.click()
@@ -122,5 +122,3 @@ def get_all_links(background_mode: bool = False, university: str = "ТГПУ", t
     print(names)
     print(len(names))
 
-
-get_all_links(True)

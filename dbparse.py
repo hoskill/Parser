@@ -45,7 +45,7 @@ def parse(dir_path: str) -> None:
 
         cur.execute(
             """UPDATE tspu_staff SET elibrary = ? WHERE last_name = ? and first_name = ? and middle_name = ?""",
-            (db_ins)
+            db_ins
         )
         conn.commit()
 
