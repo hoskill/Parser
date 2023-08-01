@@ -83,7 +83,6 @@ def get_data_by_page() -> None:
             name = employee.text
             names.append(name)
 
-        print('Информация с данной страницы успешно собрана...')
     except Exception as e:
         print(f'Произошла ошибка во время сбора ссылок... {e}')
         driver.close()
@@ -92,6 +91,7 @@ def get_data_by_page() -> None:
 
 def get_all_links(background_mode: bool = False, university: str = "ТГПУ", town: str = "Томск"):
     """Сбор ссылок всех сотрудников из библиотеки"""
+    counter: int = 1
     lib_connect(background_mode)
     get_employee(university, town)
     next_page = driver.find_element(By.CSS_SELECTOR, '#pages > table > tbody > tr > td:nth-child(12) > a')
@@ -101,14 +101,15 @@ def get_all_links(background_mode: bool = False, university: str = "ТГПУ", t
     while next_page.get_attribute('href') != last_page.get_attribute('href'):
         driver.implicitly_wait(25)
         get_data_by_page()
-        print('Готовимся к переходу на следующую страницу...')
+        print(f'Собрали информацию с {counter} страницы...')
+        counter += 1
         next_page.click()
-        print('Переход выполнен...')
         next_page = driver.find_element(By.CSS_SELECTOR, '#pages > table > tbody > tr > td:nth-child(12) > a')
         last_page = driver.find_element(By.CSS_SELECTOR, '#pages > table > tbody > tr > td:nth-child(13) > a')
 
     # Получаем ссылки с последней страницы
     get_data_by_page()
+    print(f'Информация с {counter} страницы успешно собрана...')
     next_page.click()
     get_data_by_page()
 
@@ -116,9 +117,3 @@ def get_all_links(background_mode: bool = False, university: str = "ТГПУ", t
 
     driver.close()
     driver.quit()
-
-    print(profile_links)
-    print(len(profile_links))
-    print(names)
-    print(len(names))
-

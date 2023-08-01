@@ -1,10 +1,10 @@
 import elib_parse as elib
 import mariadb
 import sys
+from env import user, password, host, db_name
 
 
-def update(background_mode: bool = False, user: str = "root", password: str = "root", host: str = "localhost",
-           db_name: str = "mydb"):
+def update(background_mode: bool = False):
     """Исполняющая функция, запускающая сбор данных с библиотеки и последующее обновление базы данных"""
     elib.get_all_links(background_mode)
 
@@ -47,4 +47,7 @@ def update(background_mode: bool = False, user: str = "root", password: str = "r
     print('Обновление прошло успешно')
 
 
-update(True)
+if __name__ == '__main__':
+    background_mode: bool = False if len(sys.argv) == 1 else sys.argv[1]
+
+    update(background_mode)
